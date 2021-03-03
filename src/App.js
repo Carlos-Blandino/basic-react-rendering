@@ -26,15 +26,17 @@ function App() {
   const [loggedIn, setLoggedIn] = React.useState(false);
   const toggleLoggedIn = () => setLoggedIn(!loggedIn);
 
-  const handleClick = (e) => {
-    console.log("User has been subscribed...");
-  };
-
   const [fullName, setFullName] = React.useState("");
   const [email, setEmail] = React.useState("");
-
+  const handleClick = (event) => {
+    event.preventDefault();
+    console.log(`${fullName} has been subscribed with ${email}`);
+    setEmail("");
+    setFullName("");
+  };
   const handleNameChange = (event) => setFullName(event.target.value);
   const handleEmailChange = (event) => setEmail(event.target.value);
+
   return (
     <div>
       <Header loggedIn={loggedIn} handleLoggedInClick={toggleLoggedIn} />
@@ -45,13 +47,12 @@ function App() {
       <section>
         <p>Please sign up to receive my updates!</p>
         <SubscribeForm
+          handleClick={handleClick}
           handleNameChange={handleNameChange}
           handleEmailChange={handleEmailChange}
           fullName={fullName}
           email={email}
         />
-
-        <button onClick={handleClick}>Subscribe</button>
       </section>
     </div>
   );
