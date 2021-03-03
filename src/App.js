@@ -2,6 +2,8 @@ import React from "react";
 import BillBoard from "./BillBoard";
 import Hobbies from "./Hobbies";
 import Schedule from "./Schedule";
+import Header from "./Header";
+import Content from "./Content";
 
 function App() {
   const name = "Kitty Kat";
@@ -20,11 +22,24 @@ function App() {
     { time: "7:00 pm", description: "play" },
     { time: "10:00 pm", description: "bedtime" },
   ];
+  const [loggedIn, setLoggedIn] = React.useState(false);
+  const toggleLoggedIn = () => setLoggedIn(!loggedIn);
+
+  const handleClick = (e) => {
+    console.log("User ahs been subscribed...");
+    console.log(e.target);
+  };
   return (
     <div>
+      <Header loggedIn={loggedIn} handleLoggedInClick={toggleLoggedIn} />
+      <Content loggedIn={loggedIn} />
       <BillBoard props={billBoardArray} />
       <Hobbies props={hobbies} />
       <Schedule props={dailyActivities} />
+      <section>
+        <p>Please click to subscribe to my updates!</p>
+        <button onClick={handleClick}>Subscribe</button>
+      </section>
     </div>
   );
 }

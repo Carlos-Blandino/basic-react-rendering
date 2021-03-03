@@ -1,4 +1,10 @@
 import React from "react";
 
-function Header() {}
+function Header({ loggedIn, handleLoggedInClick }) {
+  return (
+    <button onClick={handleLoggedInClick}>
+      {loggedIn ? "Log Out" : "Log In"}
+    </button>
+  );
+}
 export default Header;
