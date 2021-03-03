@@ -4,6 +4,7 @@ import Hobbies from "./Hobbies";
 import Schedule from "./Schedule";
 import Header from "./Header";
 import Content from "./Content";
+import SubscribeForm from "./SubscribeForm";
 
 function App() {
   const name = "Kitty Kat";
@@ -26,9 +27,14 @@ function App() {
   const toggleLoggedIn = () => setLoggedIn(!loggedIn);
 
   const handleClick = (e) => {
-    console.log("User ahs been subscribed...");
-    console.log(e.target);
+    console.log("User has been subscribed...");
   };
+
+  const [fullName, setFullName] = React.useState("");
+  const [email, setEmail] = React.useState("");
+
+  const handleNameChange = (event) => setFullName(event.target.value);
+  const handleEmailChange = (event) => setEmail(event.target.value);
   return (
     <div>
       <Header loggedIn={loggedIn} handleLoggedInClick={toggleLoggedIn} />
@@ -37,7 +43,14 @@ function App() {
       <Hobbies props={hobbies} />
       <Schedule props={dailyActivities} />
       <section>
-        <p>Please click to subscribe to my updates!</p>
+        <p>Please sign up to receive my updates!</p>
+        <SubscribeForm
+          handleNameChange={handleNameChange}
+          handleEmailChange={handleEmailChange}
+          fullName={fullName}
+          email={email}
+        />
+
         <button onClick={handleClick}>Subscribe</button>
       </section>
     </div>
